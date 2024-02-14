@@ -12,10 +12,11 @@ fun main() {
 
 fun Application.module() {
 
-    // TEST COMMENT FOR TEST COMMIT TO THE TEAM PROJECT
     configureSerialization()
     configureDatabases()
     configureHTTP()
     configureSecurity()
     configureRouting()
+
+
 }
