@@ -9,11 +9,11 @@ import ru.teamnameexception.domain.repositories.GameRepository
 class GameRepositoryImpl(
     private val gameDataSource: GameDataSource
 ) : GameRepository {
-    override suspend fun getWords(idLesson: String): List<WordEntity> {
+    override suspend fun getWords(idLesson: Long): List<WordEntity> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getLesson(idLesson: String): LessonEntity {
+    override suspend fun getLesson(idLesson: Long): LessonEntity {
         TODO("Not yet implemented")
     }
 

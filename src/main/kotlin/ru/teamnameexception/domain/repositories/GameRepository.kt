@@ -6,9 +6,9 @@ import ru.teamnameexception.domain.entities.WordEntity
 
 interface GameRepository {
 
-    suspend fun getWords(idLesson: String) : List<WordEntity>
+    suspend fun getWords(idLesson: Long) : List<WordEntity>
 
-    suspend fun getLesson(idLesson: String) : LessonEntity
+    suspend fun getLesson(idLesson: Long) : LessonEntity
 
     suspend fun setResult(result: ResultEntity)
 }
