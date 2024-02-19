@@ -11,4 +11,6 @@ interface GameRepository {
     suspend fun getLesson(idLesson: String) : LessonEntity
 
     suspend fun setResult(result: ResultEntity)
+
+    suspend fun getResults(idUser: String) : List<ResultEntity>
 }
