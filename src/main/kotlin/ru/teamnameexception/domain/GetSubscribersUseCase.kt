@@ -7,7 +7,7 @@ class GetSubscribersUseCase(
     private val subscribersRepository: SubscribersRepository
 ) {
 
-    suspend fun getSubscribers(id: Long) : List<SubscriberEntity> {
+    suspend fun getSubscribers(id: String) : List<SubscriberEntity> {
         return subscribersRepository.getSubscribers(id)
     }
 }

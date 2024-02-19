@@ -8,19 +8,16 @@ import ru.teamnameexception.domain.repositories.SubscribersRepository
 class SubscribersRepositoryImpl(
     private val subscribeDataSource: SubscribeDataSource
 ) : SubscribersRepository {
-    override suspend fun getSubscribers(idUser: Long): List<SubscriberEntity> {
+    override suspend fun getSubscribers(idUser: String): List<SubscriberEntity> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSubscriberLesson(id: Long): List<LessonEntity> {
+
+    override suspend fun subscribe(idUser: String, subscriber: SubscriberEntity) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun subscribe(idUser: Long, idSubscriber: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun unsubscribe(idUser: Long, idSubscriber: Long) {
+    override suspend fun unsubscribe(idUser: String, idSubscriber: String) {
         TODO("Not yet implemented")
     }
 }

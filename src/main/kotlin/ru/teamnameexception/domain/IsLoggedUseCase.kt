@@ -6,7 +6,7 @@ class IsLoggedUseCase (
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun isLogged(token: String): Pair<Boolean, Long> {
+    suspend fun isLogged(token: String): Pair<Boolean, String> {
         return authRepository.isLogged(token)
     }
 }

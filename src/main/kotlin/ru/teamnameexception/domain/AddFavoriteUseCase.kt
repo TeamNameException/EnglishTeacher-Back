@@ -6,7 +6,7 @@ class AddFavoriteUseCase(
     private val catalogRepository: CatalogRepository
 ) {
 
-    suspend fun addFavorite(userId: Long, lessonId: Long) {
+    suspend fun addFavorite(userId: String, lessonId: String) {
         catalogRepository.addFavorite(userId, lessonId)
     }
 }

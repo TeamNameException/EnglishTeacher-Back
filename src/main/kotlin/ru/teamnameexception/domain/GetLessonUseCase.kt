@@ -6,7 +6,7 @@ import ru.teamnameexception.domain.repositories.GameRepository
 class GetLessonUseCase (
     private val gameRepository: GameRepository
 ) {
-    suspend fun getLesson(id: Long) : LessonEntity {
+    suspend fun getLesson(id: String) : LessonEntity {
         return gameRepository.getLesson(id)
     }
 }

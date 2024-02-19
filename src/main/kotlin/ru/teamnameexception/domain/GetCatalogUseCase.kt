@@ -11,7 +11,7 @@ class GetCatalogUseCase(
         return catalogRepository.getCatalog()
     }
 
-    suspend fun getFavorite(userId: Long): List<CatalogLessonEntity> {
+    suspend fun getFavorite(userId: String): List<CatalogLessonEntity> {
         return catalogRepository.getFavorite(userId)
     }
 }

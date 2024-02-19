@@ -6,7 +6,7 @@ class UnsubscribeUseCase(
     private val subscribersRepository: SubscribersRepository
 ) {
 
-    suspend fun unsubscribe(idUser: Long, idSubscriber: Long) {
+    suspend fun unsubscribe(idUser: String, idSubscriber: String) {
         subscribersRepository.unsubscribe(idUser, idSubscriber)
     }
 }

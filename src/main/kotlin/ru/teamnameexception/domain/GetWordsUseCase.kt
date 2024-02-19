@@ -7,7 +7,7 @@ class GetWordsUseCase (
     private val gameRepository: GameRepository
 ) {
 
-    suspend fun getWords(lessonId: Long) : List<WordEntity> {
+    suspend fun getWords(lessonId: String) : List<WordEntity> {
         return gameRepository.getWords(lessonId)
     }
 }

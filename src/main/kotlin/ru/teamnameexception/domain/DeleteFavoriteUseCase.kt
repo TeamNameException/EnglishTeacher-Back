@@ -5,7 +5,7 @@ import ru.teamnameexception.domain.repositories.CatalogRepository
 class DeleteFavoriteUseCase(
     private val catalogRepository: CatalogRepository
 ) {
-    suspend fun deleteFavorite(userId: Long, lessonId: Long) {
+    suspend fun deleteFavorite(userId: String, lessonId: String) {
         catalogRepository.deleteFavorite(userId, lessonId)
     }
 }

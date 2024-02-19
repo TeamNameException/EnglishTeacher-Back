@@ -2,10 +2,10 @@ package ru.teamnameexception.domain.repositories
 
 interface AuthRepository {
 
-    suspend fun login(login: String, pass: String): String
+    suspend fun login(idUser: String): String
 
     suspend fun logout(token: String)
 
-    suspend fun isLogged(token: String): Pair<Boolean, Long>
+    suspend fun isLogged(token: String): Pair<Boolean, String>
 
 }

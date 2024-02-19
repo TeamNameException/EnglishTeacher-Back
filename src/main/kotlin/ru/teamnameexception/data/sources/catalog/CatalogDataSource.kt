@@ -1,6 +1,12 @@
 package ru.teamnameexception.data.sources.catalog
 
+import ru.teamnameexception.domain.entities.CatalogLessonEntity
+import ru.teamnameexception.domain.entities.LessonEntity
+
 interface CatalogDataSource {
 
- //TODO("бля, тут надо смотреть, какие сущности будет бд возвращать, чтобы понимать, нужно ли отдельное DatabaseEntity создавать или можно пользоваться entity из слоя domain")
+    suspend fun getCatalog(): List<CatalogLessonEntity>
+
+    suspend fun getLesson(idLesson: String): LessonEntity
+
 }

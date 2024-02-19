@@ -6,7 +6,7 @@ class LoginUseCase(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun login(login: String, password: String): String {
-        return authRepository.login(login, password)
+    suspend fun login(idUser: String): String {
+        return authRepository.login(idUser)
     }
 }

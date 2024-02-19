@@ -1,8 +1,8 @@
 package ru.teamnameexception.domain.entities
 
-data class LessonEntity(
+data class SignUpEntity(
     val id: String,
     val name: String,
-    val description: String,
-    val idCreator: String
+    val login: String,
+    val password: String
 )

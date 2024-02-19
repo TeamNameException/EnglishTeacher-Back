@@ -7,11 +7,11 @@ interface CatalogRepository {
 
     suspend fun getCatalog(): List<CatalogLessonEntity>
 
-    suspend fun getFavorite(userId: Long): List<CatalogLessonEntity>
+    suspend fun getFavorite(userId: String): List<CatalogLessonEntity>
 
-    suspend fun addFavorite(userId: Long, lessonId: Long)
+    suspend fun addFavorite(userId: String, lessonId: String)
 
-    suspend fun deleteFavorite(userId: Long, lessonId: Long)
+    suspend fun deleteFavorite(userId: String, lessonId: String)
 
 
 }

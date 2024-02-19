@@ -2,11 +2,10 @@ package ru.teamnameexception.domain
 
 import ru.teamnameexception.domain.repositories.UserRepository
 
-class RenameUserUseCase(
+class GetUserIdUseCase(
     private val userRepository: UserRepository
 ) {
-
-    suspend fun renameUser(id: String, newName: String) {
-        userRepository.renameUser(id, newName)
+    suspend fun getUserId(login: String, password: String): String {
+        return userRepository.getUserId(login, password)
     }
 }

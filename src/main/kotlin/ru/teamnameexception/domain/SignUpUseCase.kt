@@ -1,14 +1,14 @@
 package ru.teamnameexception.domain
 
+import ru.teamnameexception.domain.entities.SignUpEntity
 import ru.teamnameexception.domain.entities.UserEntity
 import ru.teamnameexception.domain.repositories.UserRepository
 
-class GetUserUseCase(
+class SignUpUseCase(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun getUser(id: String) : UserEntity {
-        return userRepository.getUser(id)
+    suspend fun signUp(userEntity: SignUpEntity) {
+        userRepository.createUser(userEntity)
     }
-
 }

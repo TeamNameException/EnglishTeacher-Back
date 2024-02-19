@@ -2,11 +2,13 @@ package ru.teamnameexception.data.sources.authication
 
 interface AuthDataSource {
 
-    suspend fun login(login: String, password: String): String
+    suspend fun login(idUser: String): String
 
     suspend fun logout(token: String)
 
-    suspend fun isLogged(token: String): Pair<Boolean, Long>
+    suspend fun isLogged(token: String): Pair<Boolean, String>
+
+
 
 
 }
