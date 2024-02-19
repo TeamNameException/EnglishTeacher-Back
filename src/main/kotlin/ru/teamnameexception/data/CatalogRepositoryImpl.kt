@@ -10,18 +10,19 @@ class CatalogRepositoryImpl(
     private val favoriteDataSource: FavoriteDataSource
 ) : CatalogRepository {
     override suspend fun getCatalog(): List<CatalogLessonEntity> {
-        TODO("Not yet implemented")
+        return catalogDataSource.getCatalog()
     }
 
     override suspend fun getFavorite(userId: String): List<CatalogLessonEntity> {
-        TODO("Not yet implemented")
+        return favoriteDataSource.getFavorite(userId)
     }
 
     override suspend fun addFavorite(userId: String, lessonId: String) {
-        TODO("Not yet implemented")
+        val lessonName = catalogDataSource.getLesson(lessonId).name
+        favoriteDataSource.addFavorite(userId, lessonId, lessonName)
     }
 
     override suspend fun deleteFavorite(userId: String, lessonId: String) {
-        TODO("Not yet implemented")
+        favoriteDataSource.deleteFavorite(userId, lessonId)
     }
 }

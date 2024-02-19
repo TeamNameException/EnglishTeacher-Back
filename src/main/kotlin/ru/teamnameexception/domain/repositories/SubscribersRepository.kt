@@ -1,6 +1,5 @@
 package ru.teamnameexception.domain.repositories
 
-import ru.teamnameexception.domain.entities.LessonEntity
 import ru.teamnameexception.domain.entities.SubscriberEntity
 
 interface SubscribersRepository {

@@ -9,19 +9,19 @@ class UserRepositoryImpl(
     private val userDataSource: UserDataSource
 ) : UserRepository {
     override suspend fun getUser(id: String): UserEntity {
-        TODO("Not yet implemented")
+        return userDataSource.getUser(id)
     }
 
     override suspend fun getUserId(login: String, password: String): String {
-        TODO("Not yet implemented")
+        return userDataSource.getUserId(login, password)
     }
 
 
     override suspend fun renameUser(id: String, newName: String) {
-        TODO("Not yet implemented")
+        userDataSource.renameUser(id, newName)
     }
 
     override suspend fun createUser(newUser: SignUpEntity) {
-        TODO("Not yet implemented")
+        userDataSource.createUser(newUser)
     }
 }

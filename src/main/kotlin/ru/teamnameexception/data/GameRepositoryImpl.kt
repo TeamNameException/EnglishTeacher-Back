@@ -14,19 +14,19 @@ class GameRepositoryImpl(
     private val wordDataSource: WordDataSource
 ) : GameRepository {
     override suspend fun getWords(idLesson: String): List<WordEntity> {
-        TODO("Not yet implemented")
+        return wordDataSource.getWords(idLesson)
     }
 
     override suspend fun getLesson(idLesson: String): LessonEntity {
-        TODO("Not yet implemented")
+        return catalogDataSource.getLesson(idLesson)
     }
 
     override suspend fun setResult(result: ResultEntity) {
-        TODO("Not yet implemented")
+        gameDataSource.setResult(result)
     }
 
     override suspend fun getResults(idUser: String): List<ResultEntity> {
-        TODO("Not yet implemented")
+        return gameDataSource.getResults(idUser)
     }
 
 }

@@ -1,7 +1,6 @@
 package ru.teamnameexception.domain
 
 import ru.teamnameexception.domain.entities.SignUpEntity
-import ru.teamnameexception.domain.entities.UserEntity
 import ru.teamnameexception.domain.repositories.UserRepository
 
 class SignUpUseCase(

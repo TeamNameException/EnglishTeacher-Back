@@ -9,15 +9,14 @@ class SubscribersRepositoryImpl(
     private val subscribeDataSource: SubscribeDataSource
 ) : SubscribersRepository {
     override suspend fun getSubscribers(idUser: String): List<SubscriberEntity> {
-        TODO("Not yet implemented")
+        return subscribeDataSource.getSubscribers(idUser)
     }
 
-
     override suspend fun subscribe(idUser: String, subscriber: SubscriberEntity) {
-        TODO("Not yet implemented")
+        subscribeDataSource.subscribe(idUser, subscriber)
     }
 
     override suspend fun unsubscribe(idUser: String, idSubscriber: String) {
-        TODO("Not yet implemented")
+        subscribeDataSource.unsubscribe(idUser, idSubscriber)
     }
 }

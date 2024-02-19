@@ -1,6 +1,10 @@
 package ru.teamnameexception.data.sources.game
 
+import ru.teamnameexception.domain.entities.ResultEntity
+
 interface GameDataSource {
 
-    //TODO("сделать епта")
+    suspend fun setResult(result: ResultEntity)
+
+    suspend fun getResults(idUser: String) : List<ResultEntity>
 }
