@@ -33,28 +33,33 @@ object UserDataSourceImpl : UserDataSource, Table("user") {
     }
 
     override suspend fun createUser(newUser: SignUpEntity) {
+        var user: Any? = null
         transaction {
-            UserDataSourceImpl.insert {
-                it[id] = newUser.id
-                it[name] = newUser.name
-                it[login] = newUser.login
-                it[password] = newUser.password
+            user = UserDataSourceImpl.select {
+                login.eq(newUser.login)
+            }.firstOrNull()
+            if (user == null) {
+                UserDataSourceImpl.insert {
+                    it[id] = newUser.id
+                    it[name] = newUser.name
+                    it[login] = newUser.login
+                    it[password] = newUser.password
+                }
             }
         }
+        if (user != null)
+            throw Exception()
     }
 
 
     override suspend fun getUserId(login: String, password: String): String {
-        return try {
+        var userId = ""
+        transaction {
             val databaseEntity = UserDataSourceImpl.select { UserDataSourceImpl.login.eq(login) }.single()
             if (password == databaseEntity[UserDataSourceImpl.password])
-                databaseEntity[id]
-            else
-                ""
-        } catch (_: Exception) {
-            ""
+                userId = databaseEntity[UserDataSourceImpl.id]
         }
-
+        return userId
     }
 
 
