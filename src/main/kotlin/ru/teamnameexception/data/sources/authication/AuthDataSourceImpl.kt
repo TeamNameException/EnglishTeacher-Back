@@ -34,8 +34,10 @@ object AuthDataSourceImpl : AuthDataSource, Table("token") {
 
     override suspend fun isLogged(token: String): Pair<Boolean, String> {
         return try {
-            val databaseEntity = AuthDataSourceImpl.select { AuthDataSourceImpl.token.eq(token) }.single()
-            Pair(true, databaseEntity[idUser])
+            transaction {
+                val databaseEntity = AuthDataSourceImpl.select { AuthDataSourceImpl.token.eq(token) }.single()
+                Pair(true, databaseEntity[idUser])
+            }
         } catch (_: Exception) {
             Pair(false, "")
         }

@@ -18,8 +18,7 @@ fun Application.module() {
 
     configureSerialization()
 
-
     configureRouting()
     configureLoginRouting()
-
+    configureCatalogRouting()
 }

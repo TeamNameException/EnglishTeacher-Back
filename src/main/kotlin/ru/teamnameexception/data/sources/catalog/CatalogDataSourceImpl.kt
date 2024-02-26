@@ -25,10 +25,13 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
     }
 
     override suspend fun getLesson(idLesson: String): LessonEntity {
-        val databaseEntity =
-            CatalogDataSourceImpl.select {
-                id.eq(idLesson)
+
+        val databaseEntity = transaction {
+            return@transaction CatalogDataSourceImpl.select {
+                CatalogDataSourceImpl.id.eq(idLesson)
             }.single()
+        }
+
         return LessonEntity(
             idLesson,
             databaseEntity[name],
