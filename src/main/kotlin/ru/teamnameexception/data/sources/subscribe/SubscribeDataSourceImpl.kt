@@ -11,7 +11,7 @@ object SubscribeDataSourceImpl : SubscribeDataSource, Table("subscribe") {
     private val nameSubscriber = SubscribeDataSourceImpl.varchar("name_subscriber", 18)
     override suspend fun getSubscribers(idUser: String): List<SubscriberEntity> {
         return transaction {
-            SubscribeDataSourceImpl.select { SubscribeDataSourceImpl.idUser.eq(idUser) }
+            return@transaction SubscribeDataSourceImpl.select { SubscribeDataSourceImpl.idUser.eq(idUser) }
                 .map {
                     SubscriberEntity(
                         it[idSubscriber],

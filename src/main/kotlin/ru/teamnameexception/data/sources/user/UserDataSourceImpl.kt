@@ -14,9 +14,9 @@ object UserDataSourceImpl : UserDataSource, Table("user") {
     private val login = UserDataSourceImpl.varchar("login", 18)
     private val password = UserDataSourceImpl.varchar("password", 18)
     override suspend fun getUser(id: String): UserEntity {
-        val databaseEntity = UserDataSourceImpl.select {
+        val databaseEntity = transaction { return@transaction UserDataSourceImpl.select {
             UserDataSourceImpl.id.eq(id)
-        }.single()
+        }.single() }
         return UserEntity(
             databaseEntity[UserDataSourceImpl.id],
             databaseEntity[name],

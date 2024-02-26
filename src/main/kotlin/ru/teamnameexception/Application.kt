@@ -21,4 +21,6 @@ fun Application.module() {
     configureRouting()
     configureLoginRouting()
     configureCatalogRouting()
+    configureUserRouting()
+    configureSubscribeRouting()
 }
