@@ -9,4 +9,10 @@ interface CatalogDataSource {
 
     suspend fun getLesson(idLesson: String): LessonEntity
 
+    suspend fun createLesson(newLesson: LessonEntity)
+
+    suspend fun redactLesson(lesson: LessonEntity)
+
+    suspend fun deleteLesson(idLesson: String)
+
 }

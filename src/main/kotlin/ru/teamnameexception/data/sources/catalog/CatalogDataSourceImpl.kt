@@ -1,8 +1,6 @@
 package ru.teamnameexception.data.sources.catalog
 
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.teamnameexception.domain.entities.CatalogLessonEntity
 import ru.teamnameexception.domain.entities.LessonEntity
@@ -38,5 +36,31 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
             databaseEntity[description],
             databaseEntity[idCreator]
         )
+    }
+
+    override suspend fun createLesson(newLesson: LessonEntity) {
+        transaction {
+            CatalogDataSourceImpl.insert {
+                it[id] = newLesson.id
+                it[name] = newLesson.name
+                it[idCreator] = newLesson.idCreator
+                it[description] = newLesson.description
+            }
+        }
+    }
+
+    override suspend fun redactLesson(lesson: LessonEntity) {
+        transaction {
+            CatalogDataSourceImpl.update({CatalogDataSourceImpl.id eq lesson.id}) {
+                it[name] = lesson.name
+                it[description] = lesson.description
+            }
+        }
+    }
+
+    override suspend fun deleteLesson(idLesson: String) {
+        transaction {
+            CatalogDataSourceImpl.deleteWhere {CatalogDataSourceImpl.id.eq(idLesson)}
+        }
     }
 }

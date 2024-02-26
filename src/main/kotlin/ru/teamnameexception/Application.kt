@@ -23,4 +23,6 @@ fun Application.module() {
     configureCatalogRouting()
     configureUserRouting()
     configureSubscribeRouting()
+    configureGameRouting()
+    configureLessonRouting()
 }

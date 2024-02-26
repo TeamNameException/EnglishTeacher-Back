@@ -18,6 +18,7 @@ object Singleton {
     private val subscribersRepository = SubscribersRepositoryImpl(SubscribeDataSourceImpl)
     private val gameRepository = GameRepositoryImpl(GameDataSourceImpl, CatalogDataSourceImpl, WordDataSourceImpl)
     private val catalogRepository = CatalogRepositoryImpl(CatalogDataSourceImpl, FavoriteDataSourceImpl)
+    private val lessonRepository = LessonRepositoryImpl(CatalogDataSourceImpl, WordDataSourceImpl)
 
     //UseCases
     val addFavoriteUseCase = AddFavoriteUseCase(catalogRepository)
@@ -32,10 +33,15 @@ object Singleton {
     val loginUseCase = LoginUseCase(authRepository)
     val logOutUseCase = LogOutUseCase(authRepository)
     val renameUserUseCase = RenameUserUseCase(userRepository)
-    val setResultUseCase = SetResultUseCase(gameRepository)
+    val resultUseCase = ResultUseCase(gameRepository)
     val signUpUseCase = SignUpUseCase(userRepository)
     val subscribeUseCase = SubscribeUseCase(subscribersRepository)
     val unsubscribeUseCase = UnsubscribeUseCase(subscribersRepository)
+    val redactLessonUseCase = RedactLessonUseCase(lessonRepository)
+    val deleteWordUseCase = DeleteWordUseCase(lessonRepository)
+    val deleteLessonUseCase = DeleteLessonUseCase(lessonRepository)
+    val createLessonUseCase = CreateLessonUseCase(lessonRepository)
+    val addWordUseCase = AddWordUseCase(lessonRepository)
 
 
 }
