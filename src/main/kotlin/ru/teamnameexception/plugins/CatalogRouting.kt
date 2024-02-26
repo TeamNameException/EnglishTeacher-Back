@@ -7,6 +7,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.coroutineScope
 import ru.teamnameexception.Singleton
+import ru.teamnameexception.plugins.entities.catalog.CatalogFromSubReceive
 import ru.teamnameexception.plugins.entities.catalog.CatalogResponse
 import ru.teamnameexception.plugins.entities.favorite.FavoriteAddReceive
 import ru.teamnameexception.plugins.entities.favorite.FavoriteReceive
@@ -20,6 +21,16 @@ fun Application.configureCatalogRouting() {
         get("/catalog") {
             coroutineScope {
                 val catalog = Singleton.getCatalogUseCase.getCatalog()
+
+                call.respond(CatalogResponse(catalog))
+            }
+        }
+
+        get("/subLesson"){
+            coroutineScope {
+                val idCreator = call.receive<CatalogFromSubReceive>().idCreator
+
+                val catalog = Singleton.getCatalogFromSubUseCase.getCatalogFromSub(idCreator)
 
                 call.respond(CatalogResponse(catalog))
             }

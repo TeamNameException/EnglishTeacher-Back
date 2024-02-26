@@ -42,6 +42,7 @@ object Singleton {
     val deleteLessonUseCase = DeleteLessonUseCase(lessonRepository)
     val createLessonUseCase = CreateLessonUseCase(lessonRepository)
     val addWordUseCase = AddWordUseCase(lessonRepository)
+    val getCatalogFromSubUseCase = GetCatalogFromSubUseCase(catalogRepository)
 
 
 }

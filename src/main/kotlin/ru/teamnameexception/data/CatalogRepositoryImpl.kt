@@ -13,6 +13,10 @@ class CatalogRepositoryImpl(
         return catalogDataSource.getCatalog()
     }
 
+    override suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity> {
+        return catalogDataSource.getCatalogFromSub(userId)
+    }
+
     override suspend fun getFavorite(userId: String): List<CatalogLessonEntity> {
         return favoriteDataSource.getFavorite(userId)
     }

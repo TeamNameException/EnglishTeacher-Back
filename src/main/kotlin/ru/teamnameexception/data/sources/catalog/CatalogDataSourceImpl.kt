@@ -22,6 +22,19 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
         }
     }
 
+    override suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity> {
+        return transaction {
+            return@transaction CatalogDataSourceImpl.select {
+                idCreator.eq(userId)
+            }.map {
+                CatalogLessonEntity(
+                    it[CatalogDataSourceImpl.id],
+                    it[name]
+                )
+            }
+        }
+    }
+
     override suspend fun getLesson(idLesson: String): LessonEntity {
 
         val databaseEntity = transaction {

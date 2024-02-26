@@ -7,6 +7,8 @@ interface CatalogRepository {
 
     suspend fun getCatalog(): List<CatalogLessonEntity>
 
+    suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity>
+
     suspend fun getFavorite(userId: String): List<CatalogLessonEntity>
 
     suspend fun addFavorite(userId: String, lessonId: String)

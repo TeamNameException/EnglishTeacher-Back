@@ -7,6 +7,8 @@ interface CatalogDataSource {
 
     suspend fun getCatalog(): List<CatalogLessonEntity>
 
+    suspend fun getCatalogFromSub(userId: String) : List<CatalogLessonEntity>
+
     suspend fun getLesson(idLesson: String): LessonEntity
 
     suspend fun createLesson(newLesson: LessonEntity)
