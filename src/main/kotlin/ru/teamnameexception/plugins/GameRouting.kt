@@ -22,7 +22,7 @@ fun Application.configureGameRouting() {
 
     routing {
 
-        get("/lesson") {
+        post("/lessons") {
             coroutineScope {
                 try {
                     val idLesson = call.receive<LessonReceive>().lessonId
@@ -46,7 +46,7 @@ fun Application.configureGameRouting() {
             }
         }
 
-        get("/word") {
+        post("/word") {
             coroutineScope {
                 try {
                     val idLesson = call.receive<WordReceive>().idLesson
@@ -58,7 +58,7 @@ fun Application.configureGameRouting() {
             }
         }
 
-        get("/result") {
+        post("/result") {
             coroutineScope {
                 val token = call.receive<GetResultReceive>().token
 

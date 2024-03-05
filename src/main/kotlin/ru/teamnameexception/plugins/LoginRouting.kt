@@ -19,7 +19,7 @@ fun Application.configureLoginRouting() {
 
     routing {
 
-        get("/login") {
+        post("/login") {
             coroutineScope {
                 val receive = call.receive(LoginReceive::class)
                 val idUser = Singleton.getUserIdUseCase.getUserId(receive.login, receive.password)

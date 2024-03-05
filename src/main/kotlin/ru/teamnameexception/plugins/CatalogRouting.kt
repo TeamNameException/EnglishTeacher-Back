@@ -26,7 +26,7 @@ fun Application.configureCatalogRouting() {
             }
         }
 
-        get("/subLesson"){
+        post("/subLesson"){
             coroutineScope {
                 val idCreator = call.receive<CatalogFromSubReceive>().idCreator
 
@@ -37,7 +37,7 @@ fun Application.configureCatalogRouting() {
         }
 
 
-        get("/favorite") {
+        put("/favorite") {
 
             coroutineScope {
                 val token = call.receive<FavoriteReceive>().token

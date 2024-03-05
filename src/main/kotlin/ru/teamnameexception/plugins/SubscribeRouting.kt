@@ -16,7 +16,7 @@ import ru.teamnameexception.plugins.entities.subscribe.UnsubscribeReceive
 fun Application.configureSubscribeRouting() {
 
     routing {
-        get("/sub") {
+        post("/sub") {
             coroutineScope {
                 val token = call.receive<SubscribersReceive>().token
 
