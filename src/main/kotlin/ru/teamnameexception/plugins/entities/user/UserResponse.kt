@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class UserReceive(
-    val token: String
+data class UserResponse(
+    val id: String,
+    val name: String,
+    val login: String
 )

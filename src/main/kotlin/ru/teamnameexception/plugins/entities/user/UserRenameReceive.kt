@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class UserReceive(
-    val token: String
+data class UserRenameReceive(
+    val token: String,
+    val newName: String
 )
