@@ -5,9 +5,9 @@ import ru.teamnameexception.domain.entities.LessonEntity
 
 interface CatalogDataSource {
 
-    suspend fun getCatalog(): List<CatalogLessonEntity>
+    suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity>
 
-    suspend fun getCatalogFromSub(userId: String) : List<CatalogLessonEntity>
+    suspend fun getCatalogFromSub(userId: String, limit: Int, offset: Int) : List<CatalogLessonEntity>
 
     suspend fun getLesson(idLesson: String): LessonEntity
 

@@ -8,5 +8,5 @@ interface FavoriteDataSource {
 
     suspend fun deleteFavorite(userId: String, lessonId: String)
 
-    suspend fun getFavorite(userId: String) : List<CatalogLessonEntity>
+    suspend fun getFavorite(userId: String, limit: Int, offset: Int) : List<CatalogLessonEntity>
 }

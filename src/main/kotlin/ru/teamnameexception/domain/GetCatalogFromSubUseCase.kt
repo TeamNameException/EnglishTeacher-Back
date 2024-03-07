@@ -7,7 +7,7 @@ class GetCatalogFromSubUseCase(
     private val catalogRepository: CatalogRepository
 ) {
 
-    suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity> {
-        return catalogRepository.getCatalogFromSub(userId)
+    suspend fun getCatalogFromSub(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
+        return catalogRepository.getCatalogFromSub(userId, limit, offset)
     }
 }

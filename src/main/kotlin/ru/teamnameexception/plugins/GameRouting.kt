@@ -60,12 +60,12 @@ fun Application.configureGameRouting() {
 
         post("/result") {
             coroutineScope {
-                val token = call.receive<GetResultReceive>().token
+                val receive = call.receive<GetResultReceive>()
 
-                val idUser = Singleton.isLoggedUseCase.isLogged(token)
+                val idUser = Singleton.isLoggedUseCase.isLogged(receive.token)
 
                 if (idUser.first) {
-                    val results = Singleton.resultUseCase.getResult(idUser.second)
+                    val results = Singleton.resultUseCase.getResult(idUser.second, receive.limit, receive.offset)
                     call.respond(GetResultResponse(results))
                 } else {
                     call.respond(HttpStatusCode.BadRequest)

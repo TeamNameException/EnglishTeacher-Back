@@ -8,6 +8,7 @@ import io.ktor.server.routing.*
 import kotlinx.coroutines.coroutineScope
 import ru.teamnameexception.Singleton
 import ru.teamnameexception.plugins.entities.catalog.CatalogFromSubReceive
+import ru.teamnameexception.plugins.entities.catalog.CatalogReceive
 import ru.teamnameexception.plugins.entities.catalog.CatalogResponse
 import ru.teamnameexception.plugins.entities.favorite.FavoriteAddReceive
 import ru.teamnameexception.plugins.entities.favorite.FavoriteReceive
@@ -18,9 +19,10 @@ fun Application.configureCatalogRouting() {
 
     routing {
 
-        get("/catalog") {
+        post("/catalog") {
             coroutineScope {
-                val catalog = Singleton.getCatalogUseCase.getCatalog()
+                val receive = call.receive<CatalogReceive>()
+                val catalog = Singleton.getCatalogUseCase.getCatalog(receive.limit, receive.offset)
 
                 call.respond(CatalogResponse(catalog))
             }
@@ -28,9 +30,9 @@ fun Application.configureCatalogRouting() {
 
         post("/subLesson"){
             coroutineScope {
-                val idCreator = call.receive<CatalogFromSubReceive>().idCreator
+                val receive = call.receive<CatalogFromSubReceive>()
 
-                val catalog = Singleton.getCatalogFromSubUseCase.getCatalogFromSub(idCreator)
+                val catalog = Singleton.getCatalogFromSubUseCase.getCatalogFromSub(receive.idCreator, receive.limit, receive.offset)
 
                 call.respond(CatalogResponse(catalog))
             }
@@ -40,12 +42,12 @@ fun Application.configureCatalogRouting() {
         put("/favorite") {
 
             coroutineScope {
-                val token = call.receive<FavoriteReceive>().token
+                val receive = call.receive<FavoriteReceive>()
 
-                val userId = Singleton.isLoggedUseCase.isLogged(token)
+                val userId = Singleton.isLoggedUseCase.isLogged(receive.token)
 
                 if (userId.first) {
-                    val favorites = Singleton.getCatalogUseCase.getFavorite(userId.second)
+                    val favorites = Singleton.getCatalogUseCase.getFavorite(userId.second, receive.limit, receive.offset)
                     call.respond(FavoriteResponse(favorites))
                 } else {
                     call.respond(HttpStatusCode.BadRequest)

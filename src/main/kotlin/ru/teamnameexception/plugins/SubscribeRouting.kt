@@ -18,12 +18,12 @@ fun Application.configureSubscribeRouting() {
     routing {
         post("/sub") {
             coroutineScope {
-                val token = call.receive<SubscribersReceive>().token
+                val receive = call.receive<SubscribersReceive>()
 
-                val userId = Singleton.isLoggedUseCase.isLogged(token)
+                val userId = Singleton.isLoggedUseCase.isLogged(receive.token)
 
                 if (userId.first) {
-                    val subscribers = Singleton.getSubscribersUseCase.getSubscribers(userId.second)
+                    val subscribers = Singleton.getSubscribersUseCase.getSubscribers(userId.second, receive.limit, receive.offset)
 
                     call.respond(SubscribersResponse(subscribers))
                 } else {

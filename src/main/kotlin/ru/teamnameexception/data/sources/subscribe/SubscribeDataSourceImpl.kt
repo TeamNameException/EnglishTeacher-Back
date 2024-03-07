@@ -9,9 +9,10 @@ object SubscribeDataSourceImpl : SubscribeDataSource, Table("subscribe") {
     private val idSubscriber = SubscribeDataSourceImpl.varchar("id_subscriber", 18)
     private val idUser = SubscribeDataSourceImpl.varchar("id_user", 18)
     private val nameSubscriber = SubscribeDataSourceImpl.varchar("name_subscriber", 18)
-    override suspend fun getSubscribers(idUser: String): List<SubscriberEntity> {
+    override suspend fun getSubscribers(idUser: String, limit: Int, offset: Int): List<SubscriberEntity> {
         return transaction {
             return@transaction SubscribeDataSourceImpl.select { SubscribeDataSourceImpl.idUser.eq(idUser) }
+                .limit(limit, offset.toLong())
                 .map {
                     SubscriberEntity(
                         it[idSubscriber],

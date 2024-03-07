@@ -25,8 +25,8 @@ class GameRepositoryImpl(
         gameDataSource.setResult(result)
     }
 
-    override suspend fun getResults(idUser: String): List<ResultEntity> {
-        return gameDataSource.getResults(idUser)
+    override suspend fun getResults(idUser: String,limit: Int, offset: Int): List<ResultEntity> {
+        return gameDataSource.getResults(idUser, limit, offset)
     }
 
 }

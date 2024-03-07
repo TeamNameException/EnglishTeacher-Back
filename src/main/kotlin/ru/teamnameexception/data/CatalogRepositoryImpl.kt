@@ -9,16 +9,16 @@ class CatalogRepositoryImpl(
     private val catalogDataSource : CatalogDataSource,
     private val favoriteDataSource: FavoriteDataSource
 ) : CatalogRepository {
-    override suspend fun getCatalog(): List<CatalogLessonEntity> {
-        return catalogDataSource.getCatalog()
+    override suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity> {
+        return catalogDataSource.getCatalog(limit, offset)
     }
 
-    override suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity> {
-        return catalogDataSource.getCatalogFromSub(userId)
+    override suspend fun getCatalogFromSub(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
+        return catalogDataSource.getCatalogFromSub(userId, limit, offset)
     }
 
-    override suspend fun getFavorite(userId: String): List<CatalogLessonEntity> {
-        return favoriteDataSource.getFavorite(userId)
+    override suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
+        return favoriteDataSource.getFavorite(userId, limit, offset)
     }
 
     override suspend fun addFavorite(userId: String, lessonId: String) {

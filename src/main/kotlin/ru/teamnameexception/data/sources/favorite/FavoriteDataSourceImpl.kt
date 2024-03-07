@@ -29,9 +29,9 @@ object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
         }
     }
 
-    override suspend fun getFavorite(userId: String): List<CatalogLessonEntity> {
+    override suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
         return transaction {
-            FavoriteDataSourceImpl.select { idUser.eq(idUser) }.map {
+            FavoriteDataSourceImpl.select { idUser.eq(idUser) }.limit(limit, offset.toLong()).map {
                 CatalogLessonEntity(
                     it[idLesson],
                     it[nameLesson]

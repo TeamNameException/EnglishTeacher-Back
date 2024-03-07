@@ -11,7 +11,7 @@ class ResultUseCase(
         gameRepository.setResult(result)
     }
 
-    suspend fun getResult(idUser: String) : List<ResultEntity> {
-        return gameRepository.getResults(idUser)
+    suspend fun getResult(idUser: String, limit: Int, offset: Int) : List<ResultEntity> {
+        return gameRepository.getResults(idUser, limit, offset)
     }
 }

@@ -11,9 +11,9 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
     private val name = CatalogDataSourceImpl.varchar("name", 18)
     private val description = CatalogDataSourceImpl.varchar("description", 50)
     private val idCreator = CatalogDataSourceImpl.varchar("id_creator", 18)
-    override suspend fun getCatalog(): List<CatalogLessonEntity> {
+    override suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity> {
         return transaction {
-            CatalogDataSourceImpl.selectAll().map {
+            CatalogDataSourceImpl.selectAll().limit(limit, offset.toLong()).map {
                 CatalogLessonEntity(
                     it[CatalogDataSourceImpl.id],
                     it[name]
@@ -22,11 +22,11 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
         }
     }
 
-    override suspend fun getCatalogFromSub(userId: String): List<CatalogLessonEntity> {
+    override suspend fun getCatalogFromSub(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
         return transaction {
             return@transaction CatalogDataSourceImpl.select {
                 idCreator.eq(userId)
-            }.map {
+            }.limit(limit, offset.toLong()).map {
                 CatalogLessonEntity(
                     it[CatalogDataSourceImpl.id],
                     it[name]
@@ -64,7 +64,7 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
 
     override suspend fun redactLesson(lesson: LessonEntity) {
         transaction {
-            CatalogDataSourceImpl.update({CatalogDataSourceImpl.id eq lesson.id}) {
+            CatalogDataSourceImpl.update({ CatalogDataSourceImpl.id eq lesson.id }) {
                 it[name] = lesson.name
                 it[description] = lesson.description
             }
@@ -73,7 +73,7 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
 
     override suspend fun deleteLesson(idLesson: String) {
         transaction {
-            CatalogDataSourceImpl.deleteWhere {CatalogDataSourceImpl.id.eq(idLesson)}
+            CatalogDataSourceImpl.deleteWhere { CatalogDataSourceImpl.id.eq(idLesson) }
         }
     }
 }

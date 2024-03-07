@@ -30,11 +30,11 @@ object GameDataSourceImpl : GameDataSource, Table("result") {
         }
     }
 
-    override suspend fun getResults(idUser: String): List<ResultEntity> {
+    override suspend fun getResults(idUser: String, limit: Int, offset: Int): List<ResultEntity> {
         return transaction {
             GameDataSourceImpl.select {
                 GameDataSourceImpl.idUser.eq(idUser)
-            }.map{
+            }.limit(limit, offset.toLong()).map{
                 ResultEntity(
                     it[idLesson],
                     it[GameDataSourceImpl.idUser],

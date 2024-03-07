@@ -12,5 +12,5 @@ interface GameRepository {
 
     suspend fun setResult(result: ResultEntity)
 
-    suspend fun getResults(idUser: String) : List<ResultEntity>
+    suspend fun getResults(idUser: String, limit: Int, offset: Int) : List<ResultEntity>
 }
