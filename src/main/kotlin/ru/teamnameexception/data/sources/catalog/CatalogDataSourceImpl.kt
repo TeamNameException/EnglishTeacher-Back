@@ -16,7 +16,24 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
             CatalogDataSourceImpl.selectAll().limit(limit, offset.toLong()).map {
                 CatalogLessonEntity(
                     it[CatalogDataSourceImpl.id],
-                    it[name]
+                    it[name],
+                    it[description],
+                    it[idCreator]
+                )
+            }
+        }
+    }
+
+    override suspend fun getLessons(lessonsIdList: List<String>): List<CatalogLessonEntity> {
+        return transaction {
+            CatalogDataSourceImpl.select {
+                CatalogDataSourceImpl.id inList lessonsIdList
+            }.map {
+                CatalogLessonEntity(
+                    it[CatalogDataSourceImpl.id],
+                    it[name],
+                    it[description],
+                    it[idCreator]
                 )
             }
         }
@@ -29,7 +46,9 @@ object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
             }.limit(limit, offset.toLong()).map {
                 CatalogLessonEntity(
                     it[CatalogDataSourceImpl.id],
-                    it[name]
+                    it[name],
+                    it[description],
+                    it[idCreator]
                 )
             }
         }

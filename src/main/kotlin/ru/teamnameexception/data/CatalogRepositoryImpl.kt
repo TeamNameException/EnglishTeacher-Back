@@ -6,7 +6,7 @@ import ru.teamnameexception.domain.repositories.CatalogRepository
 import ru.teamnameexception.domain.entities.CatalogLessonEntity
 
 class CatalogRepositoryImpl(
-    private val catalogDataSource : CatalogDataSource,
+    private val catalogDataSource: CatalogDataSource,
     private val favoriteDataSource: FavoriteDataSource
 ) : CatalogRepository {
     override suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity> {
@@ -18,7 +18,8 @@ class CatalogRepositoryImpl(
     }
 
     override suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
-        return favoriteDataSource.getFavorite(userId, limit, offset)
+        val idLessonsList = favoriteDataSource.getFavorite(userId, limit, offset)
+        return catalogDataSource.getLessons(idLessonsList)
     }
 
     override suspend fun addFavorite(userId: String, lessonId: String) {

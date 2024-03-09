@@ -2,7 +2,6 @@ package ru.teamnameexception.data.sources.favorite
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import ru.teamnameexception.domain.entities.CatalogLessonEntity
 
 object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
 
@@ -29,13 +28,10 @@ object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
         }
     }
 
-    override suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {
+    override suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<String> {
         return transaction {
             FavoriteDataSourceImpl.select { idUser.eq(idUser) }.limit(limit, offset.toLong()).map {
-                CatalogLessonEntity(
-                    it[idLesson],
-                    it[nameLesson]
-                )
+                it[idLesson]
             }
         }
     }
