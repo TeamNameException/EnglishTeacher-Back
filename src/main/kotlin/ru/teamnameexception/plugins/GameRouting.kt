@@ -13,6 +13,7 @@ import ru.teamnameexception.plugins.entities.lesson.LessonResponse
 import ru.teamnameexception.plugins.entities.result.GetResultReceive
 import ru.teamnameexception.plugins.entities.result.GetResultResponse
 import ru.teamnameexception.plugins.entities.result.PutResultReceive
+import ru.teamnameexception.plugins.entities.result.PutResultResponse
 import ru.teamnameexception.plugins.entities.word.WordReceive
 import ru.teamnameexception.plugins.entities.word.WordResponse
 import java.util.*
@@ -81,17 +82,25 @@ fun Application.configureGameRouting() {
                 val idUser = Singleton.isLoggedUseCase.isLogged(receive.token)
 
                 if (idUser.first) {
-                    Singleton.resultUseCase.setResult(
-                        ResultEntity(
-                            UUID.randomUUID().toString().substring(0..17),
-                            receive.idLesson,
-                            idUser.second,
-                            receive.time,
-                            receive.countCorrect,
-                            receive.countWrong
+                    val result = ResultEntity(
+                        UUID.randomUUID().toString().substring(0..17),
+                        receive.idLesson,
+                        idUser.second,
+                        receive.time,
+                        receive.countCorrect,
+                        receive.countWrong
+                    )
+                    Singleton.resultUseCase.setResult(result)
+                    call.respond(
+                        PutResultResponse(
+                            result.id,
+                            result.idLesson,
+                            result.idUser,
+                            result.time,
+                            result.countCorrect,
+                            result.countWrong
                         )
                     )
-                    call.respond(HttpStatusCode.OK)
                 } else {
                     call.respond(HttpStatusCode.BadRequest)
                 }
