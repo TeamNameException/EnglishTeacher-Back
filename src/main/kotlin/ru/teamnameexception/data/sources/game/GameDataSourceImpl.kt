@@ -5,7 +5,6 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.teamnameexception.domain.entities.ResultEntity
-import java.util.UUID
 
 object GameDataSourceImpl : GameDataSource, Table("result") {
 
@@ -20,7 +19,7 @@ object GameDataSourceImpl : GameDataSource, Table("result") {
     override suspend fun setResult(result: ResultEntity) {
         transaction {
             GameDataSourceImpl.insert {
-                it[id] = UUID.randomUUID().toString().substring(0..17)
+                it[id] = result.id
                 it[idLesson] = result.idLesson
                 it[idUser] = result.idUser
                 it[time] = result.time.toInt()
@@ -36,6 +35,7 @@ object GameDataSourceImpl : GameDataSource, Table("result") {
                 GameDataSourceImpl.idUser.eq(idUser)
             }.limit(limit, offset.toLong()).map{
                 ResultEntity(
+                    it[GameDataSourceImpl.id],
                     it[idLesson],
                     it[GameDataSourceImpl.idUser],
                     it[time].toLong(),

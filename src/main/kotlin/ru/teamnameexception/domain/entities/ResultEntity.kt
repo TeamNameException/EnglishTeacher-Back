@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResultEntity(
+    val id: String,
     val idLesson: String,
     val idUser: String,
     val time: Long,

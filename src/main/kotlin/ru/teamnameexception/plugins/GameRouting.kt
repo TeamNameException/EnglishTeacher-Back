@@ -15,6 +15,7 @@ import ru.teamnameexception.plugins.entities.result.GetResultResponse
 import ru.teamnameexception.plugins.entities.result.PutResultReceive
 import ru.teamnameexception.plugins.entities.word.WordReceive
 import ru.teamnameexception.plugins.entities.word.WordResponse
+import java.util.*
 
 
 fun Application.configureGameRouting() {
@@ -82,6 +83,7 @@ fun Application.configureGameRouting() {
                 if (idUser.first) {
                     Singleton.resultUseCase.setResult(
                         ResultEntity(
+                            UUID.randomUUID().toString().substring(0..17),
                             receive.idLesson,
                             idUser.second,
                             receive.time,
