@@ -7,8 +7,8 @@ class GetCatalogUseCase(
     private val catalogRepository: CatalogRepository
 ) {
 
-    suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity> {
-        return catalogRepository.getCatalog(limit, offset)
+    suspend fun getCatalog(limit: Int, offset: Int, userId: String): List<CatalogLessonEntity> {
+        return catalogRepository.getCatalog(limit, offset, userId)
     }
 
     suspend fun getFavorite(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity> {

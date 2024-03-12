@@ -68,6 +68,7 @@ fun Application.configureGameRouting() {
 
                 if (idUser.first) {
                     val results = Singleton.resultUseCase.getResult(idUser.second, receive.limit, receive.offset)
+
                     call.respond(GetResultResponse(results))
                 } else {
                     call.respond(HttpStatusCode.BadRequest)

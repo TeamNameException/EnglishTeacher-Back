@@ -5,7 +5,7 @@ import ru.teamnameexception.domain.entities.CatalogLessonEntity
 interface CatalogRepository {
 
 
-    suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity>
+    suspend fun getCatalog(limit: Int, offset: Int, userId: String): List<CatalogLessonEntity>
 
     suspend fun getCatalogFromSub(userId: String, limit: Int, offset: Int): List<CatalogLessonEntity>
 

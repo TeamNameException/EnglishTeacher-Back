@@ -22,9 +22,14 @@ fun Application.configureCatalogRouting() {
         post("/catalog") {
             coroutineScope {
                 val receive = call.receive<CatalogReceive>()
-                val catalog = Singleton.getCatalogUseCase.getCatalog(receive.limit, receive.offset)
 
-                call.respond(CatalogResponse(catalog))
+                val userId = Singleton.isLoggedUseCase.isLogged(receive.token)
+
+                if (userId.first) {
+                    val catalog = Singleton.getCatalogUseCase.getCatalog(receive.limit, receive.offset, userId.second)
+
+                    call.respond(CatalogResponse(catalog))
+                } else call.respond(HttpStatusCode.BadRequest)
             }
         }
 
@@ -72,7 +77,7 @@ fun Application.configureCatalogRouting() {
             }
         }
 
-        delete("/favorite") {
+        patch("/favorite") {
             coroutineScope {
                 val receive = call.receive<FavoriteAddReceive>()
 

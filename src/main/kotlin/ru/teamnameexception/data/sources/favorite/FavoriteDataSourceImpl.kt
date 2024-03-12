@@ -2,6 +2,7 @@ package ru.teamnameexception.data.sources.favorite
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.teamnameexception.domain.entities.CatalogLessonEntity
 
 object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
 
@@ -32,6 +33,20 @@ object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
         return transaction {
             FavoriteDataSourceImpl.select { idUser.eq(idUser) }.limit(limit, offset.toLong()).map {
                 it[idLesson]
+            }
+        }
+    }
+
+    override suspend fun checkFavorite(userId: String, lessons: List<CatalogLessonEntity>): List<CatalogLessonEntity> {
+        return transaction {
+            val lessonsIds = lessons.map { it.id }
+            val favoritesIds = FavoriteDataSourceImpl.select {
+                (idUser eq userId) and (idLesson inList lessonsIds)
+            }.toList().map { it[idLesson] }
+            return@transaction lessons.map {
+                if (it.id in favoritesIds)
+                    it.setFavorite(true)
+                else it
             }
         }
     }
