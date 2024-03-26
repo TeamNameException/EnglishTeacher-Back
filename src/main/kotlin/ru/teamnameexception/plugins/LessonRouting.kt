@@ -9,6 +9,7 @@ import kotlinx.coroutines.coroutineScope
 import ru.teamnameexception.Singleton
 import ru.teamnameexception.domain.entities.LessonEntity
 import ru.teamnameexception.plugins.entities.lesson.CreateLessonReceive
+import ru.teamnameexception.plugins.entities.lesson.CreateLessonResponse
 import ru.teamnameexception.plugins.entities.lesson.DeleteLessonReceive
 import ru.teamnameexception.plugins.entities.lesson.PatchLessonReceive
 import ru.teamnameexception.plugins.entities.word.AddWordReceive
@@ -26,17 +27,17 @@ fun Application.configureLessonRouting() {
                 val receive = call.receive<CreateLessonReceive>()
 
                 val userId = Singleton.isLoggedUseCase.isLogged(receive.token)
-
+                val lessonId = UUID.randomUUID().toString().substring(0..17)
                 if (userId.first) {
                     Singleton.createLessonUseCase.createLesson(
                         LessonEntity(
-                            UUID.randomUUID().toString().substring(0..17),
+                            lessonId,
                             receive.name,
                             receive.description,
                             userId.second
                         )
                     )
-                    call.respond(HttpStatusCode.OK)
+                    call.respond(CreateLessonResponse(lessonId))
                 } else {
                     call.respond(HttpStatusCode.BadRequest)
                 }
