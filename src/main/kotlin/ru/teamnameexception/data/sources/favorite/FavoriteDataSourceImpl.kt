@@ -8,7 +8,7 @@ object FavoriteDataSourceImpl : FavoriteDataSource, Table("favorite") {
 
     private val idUser = FavoriteDataSourceImpl.varchar("id_user", 18)
     private val idLesson = FavoriteDataSourceImpl.varchar("id_lesson", 18)
-    private val nameLesson = FavoriteDataSourceImpl.varchar("name_lesson", 18)
+    private val nameLesson = FavoriteDataSourceImpl.varchar("name_lesson", 50)
 
     override suspend fun addFavorite(userId: String, lessonId: String, nameLesson: String) {
         transaction {

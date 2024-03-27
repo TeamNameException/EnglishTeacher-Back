@@ -10,7 +10,7 @@ import ru.teamnameexception.domain.entities.UserEntity
 
 object UserDataSourceImpl : UserDataSource, Table("user") {
     private val id = UserDataSourceImpl.varchar("id", 18)
-    private val name = UserDataSourceImpl.varchar("name", 18)
+    private val name = UserDataSourceImpl.varchar("name", 50)
     private val login = UserDataSourceImpl.varchar("login", 18)
     private val password = UserDataSourceImpl.varchar("password", 18)
     override suspend fun getUser(id: String): UserEntity {

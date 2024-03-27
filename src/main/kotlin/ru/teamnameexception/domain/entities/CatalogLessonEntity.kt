@@ -8,7 +8,8 @@ data class CatalogLessonEntity(
     val name: String,
     val description: String,
     val idCreator: String,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val countWord: Int? = null,
 ) {
 
 
@@ -18,7 +19,18 @@ data class CatalogLessonEntity(
             name,
             description,
             idCreator,
-            flag
+            flag,
+            countWord
         )
     }
+
+    fun setCountWord(countWord: Int): CatalogLessonEntity =
+        CatalogLessonEntity(
+            id,
+            name,
+            description,
+            idCreator,
+            isFavorite,
+            countWord
+        )
 }

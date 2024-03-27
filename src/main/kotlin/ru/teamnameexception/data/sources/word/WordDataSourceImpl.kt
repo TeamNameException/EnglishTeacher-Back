@@ -8,8 +8,8 @@ import java.util.*
 object WordDataSourceImpl : WordDataSource, Table("word") {
 
     private val id = WordDataSourceImpl.varchar("id", 18)
-    private val rus = WordDataSourceImpl.varchar("rus", 18)
-    private val eng = WordDataSourceImpl.varchar("eng", 18)
+    private val rus = WordDataSourceImpl.varchar("rus", 60)
+    private val eng = WordDataSourceImpl.varchar("eng", 60)
     private val idLesson = WordDataSourceImpl.varchar("id_lesson", 18)
 
     override suspend fun getWords(idLesson: String): List<WordEntity> {

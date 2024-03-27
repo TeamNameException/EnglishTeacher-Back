@@ -8,8 +8,8 @@ import ru.teamnameexception.domain.entities.LessonEntity
 object CatalogDataSourceImpl : CatalogDataSource, Table("lesson") {
 
     private val id = CatalogDataSourceImpl.varchar("id", 18)
-    private val name = CatalogDataSourceImpl.varchar("name", 18)
-    private val description = CatalogDataSourceImpl.varchar("description", 50)
+    private val name = CatalogDataSourceImpl.varchar("name", 50)
+    private val description = CatalogDataSourceImpl.varchar("description", 150)
     private val idCreator = CatalogDataSourceImpl.varchar("id_creator", 18)
     override suspend fun getCatalog(limit: Int, offset: Int): List<CatalogLessonEntity> {
         return transaction {

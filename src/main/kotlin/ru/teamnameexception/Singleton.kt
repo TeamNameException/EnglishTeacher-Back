@@ -17,7 +17,7 @@ object Singleton {
     private val authRepository = AuthRepositoryImpl(AuthDataSourceImpl)
     private val subscribersRepository = SubscribersRepositoryImpl(SubscribeDataSourceImpl)
     private val gameRepository = GameRepositoryImpl(GameDataSourceImpl, CatalogDataSourceImpl, WordDataSourceImpl)
-    private val catalogRepository = CatalogRepositoryImpl(CatalogDataSourceImpl, FavoriteDataSourceImpl)
+    private val catalogRepository = CatalogRepositoryImpl(CatalogDataSourceImpl, FavoriteDataSourceImpl, WordDataSourceImpl)
     private val lessonRepository = LessonRepositoryImpl(CatalogDataSourceImpl, WordDataSourceImpl)
 
     //UseCases
